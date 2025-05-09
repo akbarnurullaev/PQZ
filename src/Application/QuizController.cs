@@ -66,7 +66,6 @@ public class QuizController : ControllerBase
         using var transaction = connection.BeginTransaction();
         try
         {
-            // Check if teacher exists
             using var checkTeacherCmd = new SqlCommand(
                 "SELECT Id FROM PotatoTeacher WHERE Name = @name", connection, transaction);
             checkTeacherCmd.Parameters.AddWithValue("@name", quizDto.PotatoTeacherName);
@@ -89,7 +88,7 @@ public class QuizController : ControllerBase
                 "VALUES (@name, @teacherId, @pathFile)", connection, transaction);
             insertQuizCmd.Parameters.AddWithValue("@name", quizDto.Name);
             insertQuizCmd.Parameters.AddWithValue("@teacherId", teacherId);
-            insertQuizCmd.Parameters.AddWithValue("@pathFile", quizDto.PotatoTeacherName);
+            insertQuizCmd.Parameters.AddWithValue("@pathFile", quizDto.Path);
             var quizId = (int)await insertQuizCmd.ExecuteScalarAsync();
 
             transaction.Commit();
