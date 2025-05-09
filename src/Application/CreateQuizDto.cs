@@ -1,6 +1,6 @@
-﻿namespace API;
+namespace Application;
 
-public class CreateQuizzDto
+public class CreateQuizDto
 {
     public string Name { get; set; }
     public string PotatoTeacherName { get; set; }
